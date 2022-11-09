@@ -35,7 +35,7 @@ protected TypeService typeService;
 	public void addNewReimbursement(CreateReimbursementRequest req) {
 		final Reimbursement newReimbursement = new Reimbursement();
 		
-		newReimbursement.setAuthor(userService.getUser(req.getAuthorID()));
+		newReimbursement.setAuthor(userService.getByUserId(req.getAuthorID()));
 		newReimbursement.setAmount(req.getAmount());
 		newReimbursement.setSubmitted(req.getSubmitted());
 		newReimbursement.setStatus(statusService.getByStatusID(req.getStatusID())); // 1-append, 2-denied, 3-approved
@@ -67,7 +67,7 @@ protected TypeService typeService;
 		Optional<Reimbursement> uReimbursement = reimbursementDAO.getById(req.getId());
 		if(uReimbursement.isPresent()) {
 			Reimbursement updateReimbursement = uReimbursement.get();
-			updateReimbursement.setResolver(userService.getUser(req.getResolverID()));
+			updateReimbursement.setResolver(userService.getByUserId(req.getResolverID()));
 			updateReimbursement.setResolved(req.getResolved());
 			updateReimbursement.setStatus(statusService.getByStatusID(req.getStatusID()));
 			reimbursementDAO.save(updateReimbursement);
