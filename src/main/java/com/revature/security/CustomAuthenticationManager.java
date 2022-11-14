@@ -28,7 +28,7 @@ public class CustomAuthenticationManager implements AuthenticationManager{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		User user = userService.getUser(authentication.getName());
 		if (!passwordEncoder.matches(authentication.getCredentials().toString(), user.getPassword())) {
-            throw new BadCredentialsException("You provided an incorrect password.");
+            throw new BadCredentialsException("You provided an incorrect username or password.");
         }
 		return new UsernamePasswordAuthenticationToken(authentication.getName(), user.getPassword());
 	}

@@ -45,21 +45,31 @@ public class UserService {
         Optional<User> user = userDAO.getUserByUsername(username);
         if(user.isPresent()) {
         	return user.get();
+        }else {
+        	throw new EntityNotFoundException();
         }
-        return null;
+        
     }
-
+	
+	
+//	static User unwrapUser(Optional<User> model, int id) {
+//		if(model.isPresent()) {
+//			return model.get();
+//		}else {
+//			throw new EntityNotFoundException();
+//		}
+//	}
 	
 	public User getByUserId(int id) {
 		return userDAO.getByUserID(id).orElse(null);
 		
 	}
-	public User login(User user) {
-		Optional<User> dbUser = userDAO.getUserByUsername(user.getUsername());
-		if(dbUser.isPresent()) {
-			return dbUser.get();
-		}
-		return null;
-	}
+//	public User login(User user) {
+//		Optional<User> dbUser = userDAO.getUserByUsername(user.getUsername());
+//		if(dbUser.isPresent()) {
+//			return dbUser.get();
+//		}
+//		return null;
+//	}
 
 }

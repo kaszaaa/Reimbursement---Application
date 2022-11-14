@@ -39,12 +39,12 @@ public class ReimbursementController {
 	@PutMapping("/updatereimbursement")
 	public ResponseEntity<UpdateReimbursementRequest> updateReimbursement(@RequestBody UpdateReimbursementRequest req, HttpSession session){ // po przecinku powinno byc jeszcze HttpSession session w request body
 		System.out.println("Put method");
-		if((boolean)session.getAttribute("logged in")==true) {
-			reimbursementService.update(req);
+//		if((boolean)session.getAttribute("logged in")==true) {
+//			reimbursementService.update(req);
 			//System.out.println(user);
 			return ResponseEntity.status(200).body(req);
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
 //	@PostMapping("/addReimbursement")
