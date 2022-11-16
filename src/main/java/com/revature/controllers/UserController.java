@@ -1,9 +1,7 @@
 package com.revature.controllers;
 
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,22 +39,16 @@ private UserService userService;
 		return ResponseEntity.status(200).build();
 	}
 	
-//	@PostMapping
-//	public ResponseEntity<User> loginAttempt(@RequestBody User user, HttpSession session){
-//		user = userService.login(user);
-//		if(user != null) {
-//			session.setAttribute("logged in", true);
-//			session.setAttribute("user", user);
-//			return ResponseEntity.status(200).body(user);
-//		}else {
-//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//		}
-//	
-//	}	
 	
 	@GetMapping("/{id}")
 	public UserDTO getByID(@PathVariable int id){
 		final User user= userService.getByUserId(id);
+		return new UserDTO(user);
+	}
+	
+	@GetMapping("/{username}")
+	public UserDTO getByUsername(@PathVariable String username){
+		final User user= userService.getUser(username);
 		return new UserDTO(user);
 	}
 

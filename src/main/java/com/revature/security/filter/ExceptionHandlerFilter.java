@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
+
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
 
 	@Override
@@ -20,8 +22,11 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			response.getWriter().write("USERNAME DOESN'T EXIST!");
 			response.getWriter().flush();
-		}
-		catch(RuntimeException e) {
+		}catch(JWTVerificationException e) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			response.getWriter().write("JWT NOT VALID!");
+			response.getWriter().flush();
+		}catch(RuntimeException e) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			response.getWriter().write("BAD REQUEST");
 			response.getWriter().flush();

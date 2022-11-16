@@ -1,5 +1,5 @@
 package com.revature.models;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-//@Check(constraints = "roleID == 1 OR roleID == 2")
-public class User implements Serializable{
+public class User{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -40,6 +39,7 @@ public class User implements Serializable{
     @Column(nullable=false, unique=true)
     private String email;
     //private int roleID;
+    
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="roleID")
 	@JsonBackReference
